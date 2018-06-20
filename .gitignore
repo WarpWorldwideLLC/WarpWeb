@@ -1,1 +1,9 @@
+/build/
 /.metadata/
+/.recommenders/
+Servers/
+Servers/.settings
+__MACOSX
+.DS_Store
+
+WarpWeb 2.0/src/com/warpww/sec/hsc.java
