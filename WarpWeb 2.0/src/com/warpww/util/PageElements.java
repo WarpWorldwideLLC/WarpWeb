@@ -2,6 +2,20 @@ package com.warpww.util;
 
 public class PageElements {
 	
+	/** ***************************************************************************
+	 * The PageElements class was intended to replace the contest of the htx 
+	 * subdirectory (html fragments that are incorporated into webpages via include 
+	 * directives) and selected dynamic HTML/JSP components.  
+	 * 
+	 * @author Warp Worldwide, LLC
+	 * @version 2.0
+	 * @since 2018.06.30
+	 * @deprecated This class is no longer supported. Functionality provided by 
+	 * this class has been moved to other objects. 
+	 *
+	* *************************************************************************** */
+	// TODO: Actions: Incomplete, should be refactored or removed. Medium Priority, but small to deal with. 
+	
 	//**********************************************************************
 	// Private Variables
 	//**********************************************************************
@@ -13,15 +27,15 @@ public class PageElements {
 	//----------------------------------------------------------------------
 	// getJspPageDirectives - was htx/pagehead.html
 	//----------------------------------------------------------------------
-	public String getJspPageDirectives() {
+	public String getJspPageDirectives98() {
 		String returnValue = null;
 		
-		returnValue += this.getJspPageDirectives201804();
+		returnValue += this.getJspPageDirectives99();
 		
 		return returnValue;
 	}
 	
-	private String getJspPageDirectives201804() {
+	private String getJspPageDirectives99() {
 		String returnValue = null;
 		
 		returnValue += "";
@@ -39,7 +53,7 @@ public class PageElements {
 	}
 	
 	
-	public String getHtmlHead() {
+	public String getHtmlHead99() {
 		String returnValue = null;
 		
 		returnValue += "";
@@ -50,23 +64,23 @@ public class PageElements {
 	}
 	
 	
-	public String getHtmlBodyHeader() {
+	public String getHtmlBodyHeader99() {
 		String returnValue = null;
 		
 		returnValue += "" + 
 				"<div id=\"TopMenu\" class=\"topMenu\">\n" + 
 				"		  <ul>\n" + 
-				"			<li class=\"topMenuItem\"><a href=\"landing201804\" ><img src=\"imgx/warp_logo3.png\" title=\"WARP Worldwide, LLC\" width=\"142\" height=\"80\" /></a>	\n" + 
+				"			<li class=\"topMenuItem\"><a href=\"landing\" ><img src=\"imgx/warp_logo3.png\" title=\"WARP Worldwide, LLC\" width=\"142\" height=\"80\" /></a>	\n" + 
 				"			<li class=\"topMenuItem\"><a>1-866-341-8535</a>\n" + 
-				"			<li class=\"topMenuItem\"><a href=\"landing201804\">Home</a>\n" + 
+				"			<li class=\"topMenuItem\"><a href=\"landing\">Home</a>\n" + 
 				"			<li class=\"topMenuItem\"><a href=\"#openModalLogin\">Login</a>\n" + 
-				"			<li class=\"topMenuItem\"><a href=\"register201804\">Create Account</a>\n" + 
-				"			<li class=\"topMenuItem\"><a href=\"cartmaint201804\">Shopping Cart</a>\n" + 
-				"			<li class=\"topMenuItem\"><a href=\"mysolutions201804\">My Solutions</a>\n" + 
+				"			<li class=\"topMenuItem\"><a href=\"register\">Create Account</a>\n" + 
+				"			<li class=\"topMenuItem\"><a href=\"cartmaint\">Shopping Cart</a>\n" + 
+				"			<li class=\"topMenuItem\"><a href=\"mysolutions\">My Solutions</a>\n" + 
 				"			<!-- \n" + 
-				"			<li class=\"topMenuItem\"><a href=\"register201804\">Join / Membership</a>\n" + 
+				"			<li class=\"topMenuItem\"><a href=\"register\">Join / Membership</a>\n" + 
 				"			 -->\n" + 
-				"			<li class=\"topMenuItem\"><a href=\"contact201804\">Contact</a>\n" + 
+				"			<li class=\"topMenuItem\"><a href=\"contact\">Contact</a>\n" + 
 				"		  </ul>\n" + 
 				"		  <div class=\"account\" align=\"right\">\n" + 
 				"			<!--  <label class=\"accountbtn\"><fmt:message key=\"menu.label.greeting\" /><%=request.getAttribute(\"Greeting\")%></label>  -->\n" + 
@@ -100,7 +114,7 @@ public class PageElements {
 				"				<!--\n" + 
 				"				<p><a href=\"Forgot your passphrase?</p>\n" + 
 				"				-->\n" + 
-				"				<p><a href=\"register201804\">Not a member? Click here to sign up for free!</a></p>\n" + 
+				"				<p><a href=\"register\">Not a member? Click here to sign up for free!</a></p>\n" + 
 				"			</div>\n" + 
 				"		</div> 	\n" + 
 				"	</form>\n" + 

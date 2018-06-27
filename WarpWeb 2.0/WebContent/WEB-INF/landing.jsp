@@ -15,7 +15,7 @@
 		<%@ include file="/htx/menu.html"%>
 	</header>
 	<!--  BODY.FORM  -->
-	<form method="post" action="landing201804" name="landing" autocomplete="off">
+	<form method="post" action="landing" name="landing" autocomplete="off">
 	
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
@@ -83,9 +83,9 @@
 <div class="warpRow" >
   	<!--  ELL  -->
   	<div class="col-sm-4 warpItem">
-		<h2><a href="product?productPage=warp_esl201804"><fmt:message key="landing.ell_header" /></a></h2>
+		<h2><a href="product?productPage=warp_esl"><fmt:message key="landing.ell_header" /></a></h2>
 		<p>
-			<a href="product?productPage=warp_esl201804">
+			<a href="product?productPage=warp_esl">
 				<img class="myImage" src="imgx/esl_800x450-3.jpg" alt=<fmt:message key="landing.ell_alt" /> /><br />
 			</a>
 			<b><p><fmt:message key="landing.ell_text3" /></p></b>
@@ -99,10 +99,10 @@
 	
 	<!--  STEM -->
 	<div class="col-sm-4 warpItem">
-		<h2><a href="product?productPage=warp_stem201804"><fmt:message key="landing.stem_header" /></a></h2>
+		<h2><a href="product?productPage=warp_stem"><fmt:message key="landing.stem_header" /></a></h2>
 		<!-- 	<p><img class="warpImage" src="http://warp.zaisscodev2.info/wp-content/uploads/2018/03/800x450-2.jpg" alt="" /><br />  -->
 		<p>
-			<a href="product?productPage=warp_stem201804">
+			<a href="product?productPage=warp_stem">
 				<img class="myImage" src="imgx/Warp_Image_Shutterstock_STEM-800-450-Resize.jpg" alt=<fmt:message key="landing.stem_alt" /> />
 			</a>
 			<b><p><fmt:message key="landing.stem_text4" /></p></b>
@@ -116,11 +116,11 @@
 	<!-- US Greenpath -->
 	<!-- class="wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_column vc_column_container vc_col-sm-4" -->
 	<div class="col-sm-4 warpItem">
-		<h2><a href="product?productPage=warp_stem201804"><fmt:message key="landing.greenpath_header" /></a></h2>
+		<h2><a href="product?productPage=warp_stem"><fmt:message key="landing.greenpath_header" /></a></h2>
 	<!-- ZCo image college learning src="http://warp.zaisscodev2.info/wp-content/uploads/2018/03/800x450-1 -->	
 	<!-- consulting-professional-dev-800-450-resize.jpg -->
 		<p>
-			<a href="product?productPage=warp_greenpath201804">
+			<a href="product?productPage=warp_greenpath">
 				<img class="myImage" src="imgx/college-learning-800x450-1.jpeg" alt=<fmt:message key="landing.prodev_alt" /> />
 			</a>
 			<b><p><fmt:message key="landing.greenpath_text2" /></p></b>

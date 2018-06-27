@@ -26,7 +26,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.warpww.sec.hsc;
 
-public class Util {
+/** ***************************************************************************
+ * The Util class contains a variety of miscellaneous static functions. 
+ * The class has no constructor and cannot be instantiated. 
+ * 
+ * @author Warp Worldwide, LLC
+ * @version 2.0
+ * @since 2018.06.30
+ *
+* *************************************************************************** */
+// TODO: Review functions, determine if methods are appropriately located or if they need to be moved. Medium Priority.
+
+public final class Util {
+	
 	
 	public static String GetFunctionName()
 	{
@@ -481,7 +493,7 @@ public class Util {
 	
 				Properties prop = new Properties();
 				ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-				InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp201804.properties");
+				InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp.properties");
 				prop.load(stream);
 				
 				hsc hscObject = new hsc();
@@ -772,6 +784,8 @@ public class Util {
 			jsonParms = json;
 			request.setAttribute("CommandText", jsonParms);
 			
+			Util.debugPrint(true, "Cart Json: ", request.getAttribute("CommandText").toString());
+			
 			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dbProcess");
 			dispatcher.include(request, response);
 			
@@ -793,7 +807,7 @@ public class Util {
 				
 				Properties prop = new Properties();
 				ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-				InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp201804.properties");
+				InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp.properties");
 				prop.load(stream);
 				
 				displayCart += "<table class=\"table1\">";
@@ -811,12 +825,13 @@ public class Util {
 				javax.json.JsonArray cart = originalDoc.getJsonArray("MySolutions");
 				for (int i = 0; i < cart.size(); i++) {
 					
+					
 					JsonObject explrObject = cart.getJsonObject(i);
+					
 					
 					String solutionCode = explrObject.getJsonString("SolutionCode").toString().replaceAll("\"", "");
 					String productCode = explrObject.getJsonString("ProductCode").toString().replaceAll("\"", "");
 					String rawDate = explrObject.getJsonString("StartDate").toString().replaceAll("\"", "").substring(0, 10);
-					System.out.println(rawDate);
 					
 					// String formattedDate = LocalDate.parse(rawDate, );
 					String localizedProductName = prop.getProperty("product.name." + productCode);

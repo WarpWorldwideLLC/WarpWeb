@@ -19,6 +19,19 @@ import java.util.Properties;
 
 import javax.json.Json;
 
+/** ***************************************************************************
+ * AuthMod contains authorization and authentication functions.<br>
+ * 
+ * AuthMod reads values from the HttpServletRequest and writes values to 
+ * HttpServletRequest for use in processing by the rest of the applcation. 
+ * 
+ * @author Warp Worldwide, LLC (Copyright 2016-18 WARP Worldwide, LLC. Subject to the XYZ license.)
+ * @version 2.0
+ * @since 2018.06.30
+ *
+* *************************************************************************** */
+// TODO:  Review methods, determine if methods are appropriately located or if they need to be moved. Medium Priority.
+
 public class AuthMod {
 
 	//**********************************************************************
@@ -34,8 +47,6 @@ public class AuthMod {
 	private boolean authenticated;
 	private String firstName;
 	private String lastName;
-	
-	
 	
 	//**********************************************************************
 	// Accessors and Mutators (Getters and Setters)
@@ -144,13 +155,13 @@ public class AuthMod {
 	//**********************************************************************
 	// Constructors
 	//**********************************************************************
+	/** 
+	 * <b>AuthMod</b> class constructor.
+	 * <br>
+	 * Accepts no parameters, takes no actions. 
+	 */
 	public AuthMod() {
-		/* 
-		 * A class with a zero-argument constructor is subject to being instantiated in an invalid state.
-		 * If such a class is instantiated manually by a developer (rather than automatically by some kind of framework), 
-		 * the developer might not realize that the class has been improperly instantiated. 
-		 * The compiler cannot detect such a problem, and even if it is documented, there is no guarantee that the developer will see the documentation.
-		 */
+		
 	}
 	
 	public AuthMod(HttpServletRequest request, HttpServletResponse response) {
@@ -267,7 +278,7 @@ public class AuthMod {
 		
 		Properties prop = new Properties();
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-		InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp201804.properties");
+		InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp.properties");
 		prop.load(stream);
 		/*
 		Enumeration en = prop.propertyNames(); 
@@ -297,8 +308,8 @@ public class AuthMod {
 			returnValue = "    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">" + greetingText  + "<span class=\"caret\"></span></a>";
 			returnValue += "    <ul class=\"dropdown-menu\">";
 			returnValue += "      <li><a href=\"#openModalLogout\">" + signout + "</a></li>";
-			returnValue += "      <li><a href=\"mysolutions201804\">" + mySolutions + "</a></li>";
-			returnValue += "      <li><a href=\"cartmaint201804\">" + shoppingCart + "</a></li>";
+			returnValue += "      <li><a href=\"mysolutions\">" + mySolutions + "</a></li>";
+			returnValue += "      <li><a href=\"cartmaint\">" + shoppingCart + "</a></li>";
 			returnValue += "    </ul>";
 			returnValue += "";
 			returnValue += "";

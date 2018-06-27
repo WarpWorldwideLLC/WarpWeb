@@ -9,7 +9,17 @@ import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
 import javax.json.JsonString;
 import javax.json.JsonObject;
-
+/** ***************************************************************************
+ * Command is an incomplete object that is intended to wrap database calls. 
+ * It includes calss to create JSON Commands, parse responses, etc. 
+ *  All designed to interact with the dao.dbProcess servlet.
+ * 
+ * @author Warp Worldwide, LLC
+ * @version 2.0
+ * @since 2018.06.30
+ *
+* *************************************************************************** */
+// TODO: Completing this object to be a complete wrapper will increase the efficiency of database modifications and changes. High Priority.
 
 public class Command 
 {
