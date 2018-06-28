@@ -93,7 +93,14 @@ public class cartmaint extends HttpServlet {
 			prop.load(stream);
 		
 			
-			String notLoggedIn = prop.getProperty("checkout.not_logged_in");
+			String notLoggedIn = "";
+			notLoggedIn += prop.getProperty("checkout.not_logged_in_1");
+			notLoggedIn += prop.getProperty("checkout.not_logged_in_2");
+			notLoggedIn += prop.getProperty("checkout.not_logged_in_3");
+			notLoggedIn += prop.getProperty("checkout.not_logged_in_4");
+			notLoggedIn += prop.getProperty("checkout.not_logged_in_5");
+			notLoggedIn += prop.getProperty("checkout.not_logged_in_6");
+			notLoggedIn += prop.getProperty("checkout.not_logged_in_7");
 			
 			request.setAttribute("displayCart", "<p style=\"color:red\"><b>" + notLoggedIn + "</b></p>");
 			request.getRequestDispatcher("/WEB-INF/cartmaint.jsp").forward(request, response);

@@ -35,7 +35,6 @@ public class mysolutions extends HttpServlet {
 		
 		if(a.getAuthenticated()) { 
 			request.setAttribute("mySolutions", Util.getMemberSolution(request, response, a.getMemberID()));
-			// request.setAttribute("mySolutions", "Your solutions go here.");
 		} else {
 			request.setAttribute("mySolutions", "You must be logged in to view your solutions.");
 		}
