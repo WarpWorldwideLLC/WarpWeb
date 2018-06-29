@@ -48,6 +48,65 @@ public class AuthMod {
 	private String firstName;
 	private String lastName;
 	
+	private hsc configW; 
+	
+	
+	//**********************************************************************
+	// Constructors
+	//**********************************************************************
+	/** 
+	 * <b>AuthMod</b> class constructor.
+	 * <br>
+	 * Accepts no parameters, takes no actions. 
+	 */
+	public AuthMod() {
+		this.configW = new hsc();
+		
+	}
+	
+	public AuthMod(HttpServletRequest request, HttpServletResponse response) {
+		
+		this.configW = new hsc();
+		
+		this.request = request;
+		this.response = response;
+		
+	}
+	
+	public AuthMod(HttpServletRequest request, HttpServletResponse response, Sign actionValue) {
+
+		this.configW = new hsc();
+		
+		this.request = request;
+		this.response = response;
+		String greeting;
+		
+		// indicates the values are already stored in session variables. 
+		switch (actionValue) {
+		
+		case in: 
+			greeting = getGreeting(Integer.parseInt(this.request.getAttribute("MemberID").toString()), this.request, this.response, true);
+			this.memberID = Integer.parseInt(request.getAttribute("MemberID").toString());
+			this.authenticated = true;
+			System.out.println("Authenticated.");
+			break;
+			
+		default:
+			this.authenticated = false;
+			this.memberID = 0;
+			greeting = getGreeting(this.memberID, this.request, this.response, false);
+			System.out.println("Not Authenticated.");
+			break;
+			
+		}
+				
+		request.setAttribute("Greeting", greeting);
+
+			
+		
+	}
+	
+	
 	//**********************************************************************
 	// Accessors and Mutators (Getters and Setters)
 	//**********************************************************************
@@ -151,57 +210,7 @@ public class AuthMod {
 		
 	}
 	
-	
-	//**********************************************************************
-	// Constructors
-	//**********************************************************************
-	/** 
-	 * <b>AuthMod</b> class constructor.
-	 * <br>
-	 * Accepts no parameters, takes no actions. 
-	 */
-	public AuthMod() {
-		
-	}
-	
-	public AuthMod(HttpServletRequest request, HttpServletResponse response) {
-		
-		this.request = request;
-		this.response = response;
-		
-	}
-	
-	public AuthMod(HttpServletRequest request, HttpServletResponse response, Sign actionValue) {
 
-		this.request = request;
-		this.response = response;
-		String greeting;
-		
-		// indicates the values are already stored in session variables. 
-		switch (actionValue) {
-		
-		case in: 
-			greeting = getGreeting(Integer.parseInt(this.request.getAttribute("MemberID").toString()), this.request, this.response, true);
-			this.memberID = Integer.parseInt(request.getAttribute("MemberID").toString());
-			this.authenticated = true;
-			System.out.println("Authenticated.");
-			break;
-			
-		default:
-			this.authenticated = false;
-			this.memberID = 0;
-			greeting = getGreeting(this.memberID, this.request, this.response, false);
-			System.out.println("Not Authenticated.");
-			break;
-			
-		}
-				
-		request.setAttribute("Greeting", greeting);
-
-			
-		
-	}
-	
 	//**********************************************************************
 	// Methods
 	//**********************************************************************
@@ -247,7 +256,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static String getGreetingAuthenticated(int MemberID, HttpServletRequest request, HttpServletResponse response) {
+	public String getGreetingAuthenticated(int MemberID, HttpServletRequest request, HttpServletResponse response) {
 		String returnValue = "";
 		
 		try
@@ -278,7 +287,7 @@ public class AuthMod {
 		
 		Properties prop = new Properties();
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-		InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp.properties");
+		InputStream stream = loader.getResourceAsStream(this.configW.resourceFile);
 		prop.load(stream);
 		/*
 		Enumeration en = prop.propertyNames(); 
@@ -330,14 +339,14 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static String getGreetingAnonymous(HttpServletRequest request, HttpServletResponse response) {
+	public String getGreetingAnonymous(HttpServletRequest request, HttpServletResponse response) {
 		String returnValue = "";
 		
 		try
 		{
 			Properties prop = new Properties();
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-			InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp.properties");
+			InputStream stream = loader.getResourceAsStream(this.configW.resourceFile);
 			prop.load(stream);
 			/*
 			Enumeration en = prop.propertyNames(); 
@@ -361,7 +370,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static String getGreeting(int MemberID, HttpServletRequest request, HttpServletResponse response, boolean authenticated) {
+	public String getGreeting(int MemberID, HttpServletRequest request, HttpServletResponse response, boolean authenticated) {
 		String returnValue = "";
 		// accountButton
 		
@@ -386,7 +395,7 @@ public class AuthMod {
 	}
 	
 	// Format time for the token. 
-	public static String formatTokenTime(Instant instantValue) {
+	public String formatTokenTime(Instant instantValue) {
 		String returnValue = null;
 		
 		LocalDateTime datetime = LocalDateTime.ofInstant(instantValue, ZoneOffset.UTC);
@@ -395,24 +404,22 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static int getTokenMemberID(String memberHex, String createTime) {
+	public int getTokenMemberID(String memberHex, String createTime) {
 		int returnValue = -1;
 		
 		int rawValue = Integer.parseInt(memberHex, 16);
 		String offset = createTime.substring(14);
-		hsc hscObject = new hsc();
-		returnValue = rawValue - Integer.parseInt(offset) - hscObject.tokenMemberPadding;
+		returnValue = rawValue - Integer.parseInt(offset) - this.configW.tokenMemberPadding;
 		
 		return returnValue;
 	}
 	
-	public static String formatTokenMemberID(String createTime, int memberID) {
+	public String formatTokenMemberID(String createTime, int memberID) {
 		String returnValue = null;
 		
 			// Token is: Embedded Member ID
 			String offset = createTime.substring(14);
-			hsc hscObject = new hsc();
-			int memberCodeN = memberID + Integer.parseInt(offset) + hscObject.tokenMemberPadding;
+			int memberCodeN = memberID + Integer.parseInt(offset) + this.configW.tokenMemberPadding;
 			String memberCode = Integer.toHexString(memberCodeN);
 			
 			returnValue = memberCode;
@@ -420,7 +427,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static boolean validateTokenHash(String tokenHash, String createTime, String userAgent, String remoteAddr, int memberID) {
+	public boolean validateTokenHash(String tokenHash, String createTime, String userAgent, String remoteAddr, int memberID) {
 		boolean returnValue = false;
 		
 		try {
@@ -443,7 +450,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static String formatTokenHash (String createTime, String userAgent, String remoteAddr, int memberID) {
+	public String formatTokenHash (String createTime, String userAgent, String remoteAddr, int memberID) {
 		String returnValue = null;
 		
 		try { 
@@ -462,7 +469,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static String encodeToken (String rawTokenValue) { 
+	public String encodeToken (String rawTokenValue) { 
 		String returnValue = null;
 		
 		try {
@@ -478,7 +485,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static String decodeToken (String encodedTokenValue) {
+	public String decodeToken (String encodedTokenValue) {
 		String returnValue = null;
 		
 		try {
@@ -495,7 +502,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static String createAuthenticationToken(HttpServletRequest request, HttpServletResponse response, int memberID) {
+	public String createAuthenticationToken(HttpServletRequest request, HttpServletResponse response, int memberID) {
 		String returnValue = null;
 		try {
 
@@ -522,13 +529,12 @@ public class AuthMod {
 			String tokenFinal = encodeToken(tokenRaw);
 			
 			// Store a token in a cookie. 
-			hsc hscObject = new hsc();
-			Cookie userCookie = new Cookie(hscObject.cookieName, tokenFinal);
+			Cookie userCookie = new Cookie(this.configW.cookieName, tokenFinal);
 			userCookie.setComment("Used by Warp Worldwide website.");
-			userCookie.setMaxAge(hscObject.tokenExpirationDuration);      
-			// userCookie.setDomain(hsc.cookieDomain);
-			userCookie.setSecure(hscObject.cookieSSL);       	// Cookie can only be retreived over SSL
-			userCookie.setHttpOnly(true);       		 	// Cookie can only be retrieved via HTTP 
+			userCookie.setMaxAge(this.configW.tokenExpirationDuration);      
+			
+			userCookie.setSecure(this.configW.cookieSSL);       // Cookie can only be retrieved over SSL
+			userCookie.setHttpOnly(true);       		 		// Cookie can only be retrieved via HTTP 
 			response.addCookie(userCookie);
 			System.out.println("Authentication Cookie added.");
 			returnValue = tokenFinal;
@@ -541,11 +547,11 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static boolean authenticateToken(HttpServletRequest request) {
+	public boolean authenticateToken(HttpServletRequest request) {
 
 		boolean returnValue = false;
 		
-		// Loop through available Cookes and find the correct one.
+		// Loop through available Cookies and find the correct one.
 		String cookieValue = null;
 		
 		Cookie[] cookies = request.getCookies();
@@ -555,8 +561,8 @@ public class AuthMod {
 		    {
 		    		
 		        Cookie cookie = cookies[i];
-		        hsc hscObject = new hsc();
-		        if (hscObject.cookieName.equals(cookie.getName())) 
+		        
+		        if (this.configW.cookieName.equals(cookie.getName())) 
 		        {
 		        		/*
 		            System.out.println("Domain: " + cookie.getDomain()); 
@@ -597,7 +603,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static boolean verifyToken (String tokenValue, HttpServletRequest request) {
+	public boolean verifyToken (String tokenValue, HttpServletRequest request) {
 		boolean returnValue = false;
 		// Opposite of creating a token
 		if(tokenValue == null) {
@@ -631,7 +637,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static boolean validateSignon(HttpServletRequest request, HttpServletResponse response)
+	public boolean validateSignon(HttpServletRequest request, HttpServletResponse response)
 	{
 		boolean returnValue = false;
 		
@@ -677,7 +683,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static boolean authenticate(HttpServletRequest request, HttpServletResponse response) { 
+	public boolean authenticate(HttpServletRequest request, HttpServletResponse response) { 
 		boolean returnValue = false;
 		
 		// Validate authentication - 
@@ -685,13 +691,13 @@ public class AuthMod {
 		String greeting = "";
 		
 		try {
-			if(AuthMod.authenticateToken(request)) {
+			if(this.authenticateToken(request)) {
 				returnValue = true;
-				greeting = AuthMod.getGreeting(Integer.parseInt(request.getAttribute("TokenMemberID").toString()), request, response, true);
+				greeting = this.getGreeting(Integer.parseInt(request.getAttribute("TokenMemberID").toString()), request, response, true);
 				request.setAttribute("Greeting", greeting);
 			} else {
 				returnValue = false;
-				greeting = AuthMod.getGreeting(0, request, response, false);;
+				greeting = this.getGreeting(0, request, response, false);;
 			}
 		} catch (Exception ex) {
 			returnValue = false;
@@ -702,7 +708,7 @@ public class AuthMod {
 		return returnValue;
 	}
 	
-	public static boolean printLoginMenu(HttpServletRequest request, HttpServletResponse response, boolean authenticated, int MemberID) { 
+	public  boolean printLoginMenu(HttpServletRequest request, HttpServletResponse response, boolean authenticated, int MemberID) { 
 		boolean returnValue = false;
 		
 		// accountButton

@@ -9,7 +9,6 @@ import java.io.StringReader;
 import java.net.URL;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.Properties;
 
 import javax.json.Json;
 import javax.json.JsonObject;

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.warpww.ell.ellutil;
 import com.warpww.sec.AuthMod;
 import com.warpww.util.Util;
 

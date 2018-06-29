@@ -39,7 +39,8 @@ public class checkoutreceipt extends HttpServlet {
 		boolean authenticated = false;
 		
 		// Authenticate the User via Cookie; populate memberID and authTime fields.
-		if(AuthMod.authenticate(request, response)) {
+		AuthMod authmod = new AuthMod();
+		if(authmod.authenticate(request, response)) {
 			memberID = Integer.parseInt(request.getAttribute("verifyToken_MemberID").toString());
 			authTime = request.getAttribute("verifyToken_CreateTime").toString();
 			authenticated = true;

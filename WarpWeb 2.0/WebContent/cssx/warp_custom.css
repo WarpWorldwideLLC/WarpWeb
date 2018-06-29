@@ -164,6 +164,12 @@ th, td { padding: 5px; }
 	color: white !important;
 }
 
+ .bottomMenu li a:hover {
+     color: white !important;
+     background: black !important;
+ }
+ 
+
 /* ************************************************************************* */
 /* F O O T E R                                                               */
 /* ************************************************************************* */
