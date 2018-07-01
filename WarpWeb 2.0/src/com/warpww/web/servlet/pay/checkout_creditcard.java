@@ -96,7 +96,7 @@ public class checkout_creditcard extends HttpServlet {
 							
 			} else {
 				System.out.println("Stripe Source Id Not Found");
-				request.getRequestDispatcher("/WEB-INF/checkout.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/checkout_creditcard.jsp").forward(request, response);
 			}
 
 					
@@ -112,7 +112,7 @@ public class checkout_creditcard extends HttpServlet {
 			String notLoggedIn = prop.getProperty("checkout.not_logged_in");
 			
 			request.setAttribute("displayCart", "<p style=\"color:red\"><b>" + notLoggedIn + "</b></p>");
-			request.getRequestDispatcher("/WEB-INF/checkout.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/checkout_creditcard.jsp").forward(request, response);
 		}
 		
 	}

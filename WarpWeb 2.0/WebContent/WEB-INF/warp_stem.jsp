@@ -26,8 +26,9 @@
 				<li><fmt:message key="warp_stem.p1.13.2" /></li>
 				<li><fmt:message key="warp_stem.p1.13.3" /></li>
 				<li><fmt:message key="warp_stem.p1.13.4" /></li>
+				<!--
 				<li><fmt:message key="warp_stem.p1.13.5" /></li>
-				<!--  
+				  
 				<li><fmt:message key="warp_stem.p1.13.6" /></li>
 				<li><fmt:message key="warp_stem.p1.13.7" /></li>
 				 -->
