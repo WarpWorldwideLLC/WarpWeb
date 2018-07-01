@@ -9,6 +9,7 @@ import java.io.StringReader;
 import java.net.URL;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Properties;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -346,7 +347,14 @@ public class ellutil {
 
 				// System.out.println("Cart: " + displayCart);
 			} else {
-				displayCart = "No Solutions Active or Available.";
+								
+				Properties prop = new Properties();
+				ClassLoader loader = Thread.currentThread().getContextClassLoader();           
+				InputStream stream = loader.getResourceAsStream(configW.resourceFile);
+				prop.load(stream);
+				
+				// displayCart = "No Solutions Active or Available.";
+				displayCart = prop.getProperty("mysolutions.no_solutions");
 			}
 			
 			returnValue = true;

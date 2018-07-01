@@ -880,7 +880,17 @@ public final class Util {
 				request.setAttribute("displayCart", displayCart);
 				// System.out.println("Cart: " + displayCart);
 			} else {
-				displayCart = "No Solutions Active or Available.";
+				// displayCart = "No Solutions Active or Available.";
+				
+				hsc configW = new hsc();
+				
+				Properties prop = new Properties();
+				ClassLoader loader = Thread.currentThread().getContextClassLoader();           
+				InputStream stream = loader.getResourceAsStream(configW.resourceFile);
+				prop.load(stream);
+				
+				// displayCart = "No Solutions Active or Available.";
+				displayCart = prop.getProperty("mysolutions.no_solutions");
 			}
 			
 			returnValue = displayCart;
