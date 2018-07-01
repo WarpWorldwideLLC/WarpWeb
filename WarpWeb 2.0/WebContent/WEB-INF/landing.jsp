@@ -37,12 +37,11 @@
     </div>
  -->
  
- 	<!-- 
+ 
     <div class="item active">
       <img src="imgx/1600x650-grace2.jpg" alt=<fmt:message key="landing.carousel.grace_alt" />>
     </div>
- 	-->
-    <div class="item active">
+    <div class="item">
       <img src="imgx/Warp_Image_Hands2-1600-650.jpg" alt=<fmt:message key="landing.carousel.hands_alt" />>
     </div>
     
@@ -115,20 +114,37 @@
 	
 	<!-- US Greenpath -->
 	<!-- class="wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_column vc_column_container vc_col-sm-4" -->
+	<!--  
 	<div class="col-sm-4 warpItem">
 		<h2><a href="product?productPage=warp_stem"><fmt:message key="landing.greenpath_header" /></a></h2>
-	<!-- ZCo image college learning src="http://warp.zaisscodev2.info/wp-content/uploads/2018/03/800x450-1 -->	
-	<!-- consulting-professional-dev-800-450-resize.jpg -->
 		<p>
 			<a href="product?productPage=warp_greenpath">
 				<img class="myImage" src="imgx/college-learning-800x450-1.jpeg" alt=<fmt:message key="landing.prodev_alt" /> />
 			</a>
-			<b><p><fmt:message key="landing.greenpath_text2" /></p></b>
-			<b><p><fmt:message key="landing.greenpath_text3" /></p></b>
+			<p><fmt:message key="landing.greenpath_text2" /></p>
+			<p><fmt:message key="landing.greenpath_text3" /></p>
 			<p><fmt:message key="landing.greenpath_text1" /></p>
 
 		</p>
 	</div>
+	-->
+	<!-- Cultural Camps -->
+	<!-- class="wpb_animate_when_almost_visible wpb_fadeIn fadeIn wpb_column vc_column_container vc_col-sm-4" -->
+	<div class="col-sm-4 warpItem">
+		<h2><a href="product?productPage=warp_camps"><fmt:message key="landing.camps_header" /></a></h2>
+	<!-- ZCo image college learning src="http://warp.zaisscodev2.info/wp-content/uploads/2018/03/800x450-1 -->	
+	<!-- consulting-professional-dev-800-450-resize.jpg -->
+		<p>
+			<a href="product?productPage=warp_camps">
+				<img class="myImage" src="imgx/college-learning-800x450-1.jpeg" alt=<fmt:message key="landing.camps_alt" /> />
+			</a>
+			<p><fmt:message key="landing.camps_text1" /></p>
+			<p><fmt:message key="landing.camps_text2" /></p>
+			<p><fmt:message key="landing.camps_text3" /></p>
+
+		</p>
+	</div>
+	
 </div>
 
 

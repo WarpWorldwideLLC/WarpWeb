@@ -107,9 +107,11 @@ public class checkout_alipay extends HttpServlet {
 					
 		} else {
 			
+			hsc configW = new hsc();
+			
 			Properties prop = new Properties();
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-			InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp.properties");
+			InputStream stream = loader.getResourceAsStream(configW.resourceFile);
 			prop.load(stream);
 		
 			
@@ -189,9 +191,11 @@ public class checkout_alipay extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		hsc configW = new hsc();
+		
 		Properties prop = new Properties();
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-		InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp.properties");
+		InputStream stream = loader.getResourceAsStream(configW.resourceFile);
 		try {
 			prop.load(stream);
 		} catch (IOException e) {

@@ -27,10 +27,13 @@
 				<li><fmt:message key="warp_stem.p1.13.3" /></li>
 				<li><fmt:message key="warp_stem.p1.13.4" /></li>
 				<li><fmt:message key="warp_stem.p1.13.5" /></li>
+				<!--  
 				<li><fmt:message key="warp_stem.p1.13.6" /></li>
 				<li><fmt:message key="warp_stem.p1.13.7" /></li>
+				 -->
 			</ul>
-			<p><fmt:message key="warp_stem.p1.14" /></p>	
+			<p><fmt:message key="warp_stem.p1.14" /></p>
+			<!--  
 			<ul>
 				<li><fmt:message key="warp_stem.p1.14.1" /></li>
 				<li><fmt:message key="warp_stem.p1.14.2" /></li>
@@ -39,6 +42,7 @@
 				<li><fmt:message key="warp_stem.p1.14.5" /></li>
 				<li><fmt:message key="warp_stem.p1.14.6" /></li>
 			</ul>
+			 -->	
 			<p><fmt:message key="warp_stem.p1.15" /></p>	
 		</div>
 		<div>

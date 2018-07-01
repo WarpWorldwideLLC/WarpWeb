@@ -102,9 +102,11 @@ public class checkout_creditcard extends HttpServlet {
 					
 		} else {
 			
+			hsc configW = new hsc();
+			
 			Properties prop = new Properties();
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-			InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp.properties");
+			InputStream stream = loader.getResourceAsStream(configW.resourceFile);
 			prop.load(stream);
 		
 			String notLoggedIn = prop.getProperty("checkout.not_logged_in");

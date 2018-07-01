@@ -491,9 +491,11 @@ public final class Util {
 				displayCart += "<table class=\"table1\">";
 				displayCart += "<tr><td>&nbsp</td><td>Code</td><td>Name</td><td>Price</td><td>&nbsp</td></tr>";
 	
+				hsc configW = new hsc();
+				
 				Properties prop = new Properties();
 				ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-				InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp.properties");
+				InputStream stream = loader.getResourceAsStream(configW.resourceFile);
 				prop.load(stream);
 				
 				hsc hscObject = new hsc();
@@ -805,9 +807,11 @@ public final class Util {
 				// returnValue = originalDoc.getJsonString("CommandResults").toString();
 				// System.out.println("Checkout getShoppingCart ProcStatus: " + returnValue);
 				
+				hsc configW = new hsc();
+				
 				Properties prop = new Properties();
 				ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-				InputStream stream = loader.getResourceAsStream("/com/warpww/web/i18n/warp.properties");
+				InputStream stream = loader.getResourceAsStream(configW.resourceFile);
 				prop.load(stream);
 				
 				displayCart += "<table class=\"table1\">";
