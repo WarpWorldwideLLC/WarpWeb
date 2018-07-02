@@ -47,6 +47,10 @@ public class test extends HttpServlet {
 		//InputStream stream = loader.getResourceAsStream("/com.warpww.web/src/com/warpww/web/i18n/warp.properties");
 		//prop.load(stream);
 				
+		
+		java.util.Date dt = new java.util.Date();
+		request.setAttribute("DateTime", dt.toString());
+		
 		// List all the headers with this request.
 		String headerNameList = "";
 		Enumeration<String> headerNames = request.getHeaderNames();

@@ -14,10 +14,10 @@
 			<p><fmt:message key="news.page_title" /></p>
 			<div style=" margin-top: 1em;">
   				<!--  <p class="lead">Download the full brochure by clicking below.</p>  -->
-  				<a target="_blank" href="filx/news_lingo.pdf">06/28/2018 - WARP Partners with Lingo Media / ELL to provide world-class English Language Training in China</a>
+  				<a target="_blank" href="filx/news_lingo.pdf"><fmt:message key="warp_news.lingo1" /></a>
 			</div>
 			<div style=" margin-top: 1em;">
-  				<a target="_blank" href="filx/news_cultural_immersion.pdf">02/05/2018 - WARP Partners with Xi'An International University to offer Cultural Immersion Camps</a>
+  				<a target="_blank" href="filx/news_cultural_immersion.pdf">2018-02-05 - WARP Partners with Xi'An International University to offer Cultural Immersion Camps</a>
 			</div>
 
 		</form>

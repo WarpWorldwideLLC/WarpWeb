@@ -27,6 +27,10 @@
 					<p><img src="imgx/ell_1001.png" class="warpImage"></p>
 				</div>
 				<p><fmt:message key="warp_esl.p1.10" /></p>
+				<p><fmt:message key="warp_esl.p1.90.0" /></p>
+				<p><fmt:message key="warp_esl.p1.90.1" /></p>
+				<p><fmt:message key="warp_esl.p1.90.2" /></p>
+
 				<div style="margin-left: 25px; line-height: 125%;">									
 					<div style=" margin-top: 1em;">
 						<button name="purchase" class="btn btn-primary" value=<fmt:message key="warp_esl.p1.98.00" /> ><fmt:message key="warp_esl.p1.99.00" /></button>
@@ -52,7 +56,11 @@
 				<div>
 					<p><img src="imgx/ell_1002.png" class="warpImage"></p>
 				</div>
-				<fmt:message key="warp_esl.p2.10" />
+				<fmt:message key="warp_esl.p2.10" /><br>
+				<p><fmt:message key="warp_esl.p2.90.0" /></p>
+				<p><fmt:message key="warp_esl.p2.90.1" /></p>
+				<p><fmt:message key="warp_esl.p2.90.2" /></p>
+				
 				<div style="margin-left: 25px; line-height: 125%;">									
 					<div style=" margin-top: 1em;">
 						<button name="purchase" class="btn btn-primary" value=<fmt:message key="warp_esl.p2.98.02" /> ><fmt:message key="warp_esl.p2.99.02" /></button>
@@ -86,6 +94,10 @@
 				</ul>
 				<p><fmt:message key="warp_esl.p3.13" /></p>
 				<p><fmt:message key="warp_esl.p3.14" /></p>
+				
+				<p><fmt:message key="warp_esl.p3.90.0" /></p>
+				<p><fmt:message key="warp_esl.p3.90.1" /></p>
+				<p><fmt:message key="warp_esl.p3.90.2" /></p>
 	
 				<div style="margin-left: 25px; line-height: 125%;">									
 					<div style=" margin-top: 1em;">
@@ -128,6 +140,10 @@
 					</li>
 				</ol>
 				 -->
+				<p><fmt:message key="warp_esl.p4.90.0" /></p>
+				<p><fmt:message key="warp_esl.p4.90.1" /></p>
+				<p><fmt:message key="warp_esl.p4.90.2" /></p>
+				 
 				<div style="margin-left: 25px; line-height: 125%;">									
 					<div style=" margin-top: 1em;">
 						<button name="purchase" class="btn btn-primary" value=<fmt:message key="warp_esl.p4.98.00" /> ><fmt:message key="warp_esl.p4.99.00" /></button>
@@ -156,6 +172,11 @@
 				<p><fmt:message key="warp_esl.p5.11" /></p>
 				<p><fmt:message key="warp_esl.p5.12" /></p>
 				<p><fmt:message key="warp_esl.p5.13" /></p>
+				
+				<p><fmt:message key="warp_esl.p5.90.0" /></p>
+				<p><fmt:message key="warp_esl.p5.90.1" /></p>
+				<p><fmt:message key="warp_esl.p5.90.2" /></p>
+				
 				<div style="margin-left: 25px; line-height: 125%;">									
 					<div style=" margin-top: 1em;">
 						<button name="purchase" class="btn btn-primary" value=<fmt:message key="warp_esl.p5.98.02" /> ><fmt:message key="warp_esl.p5.99.02" /></button>
@@ -178,6 +199,11 @@
 				</div>
 				<p><fmt:message key="warp_esl.p6.10" /></p>
 				<p><fmt:message key="warp_esl.p6.11" /></p>
+				
+				<p><fmt:message key="warp_esl.p6.90.0" /></p>
+				<p><fmt:message key="warp_esl.p6.90.1" /></p>
+				<p><fmt:message key="warp_esl.p6.90.2" /></p>
+				
 				<div style="margin-left: 25px; line-height: 125%;">									
 					<div style=" margin-top: 1em;">
 						<button name="purchase" class="btn btn-primary" value=<fmt:message key="warp_esl.p6.98.00" /> ><fmt:message key="warp_esl.p6.99.00" /></button>

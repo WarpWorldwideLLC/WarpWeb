@@ -89,7 +89,19 @@
 				<img class="myImage" src="imgx/esl_800x450-3.jpg" alt=<fmt:message key="landing.ell_alt" /> /><br />
 			</a>
 			<b><p><fmt:message key="landing.ell_text3" /></p></b>
-			<b><p><fmt:message key="landing.ell_text4" /></p></b>
+			<p><fmt:message key="landing.ell_text4" /></p>
+		
+			<p><fmt:message key="landing.ell_text4.1" /></p>
+			<p><fmt:message key="landing.ell_text4.2" /></p>
+			<p><fmt:message key="landing.ell_text4.3" /></p>
+			<!-- 
+			<p><fmt:message key="landing.ell_text4.4" /></p>
+			<p><fmt:message key="landing.ell_text4.5" /></p>
+			<p><fmt:message key="landing.ell_text4.6" /></p>
+			<p><fmt:message key="landing.ell_text4.7" /></p>
+			<p><fmt:message key="landing.ell_text4.8" /></p>
+			<p><fmt:message key="landing.ell_text4.9" /></p>
+			-->		
 			<p><fmt:message key="landing.ell_text1" /></p>
 			<p><fmt:message key="landing.ell_text2" /></p>
 

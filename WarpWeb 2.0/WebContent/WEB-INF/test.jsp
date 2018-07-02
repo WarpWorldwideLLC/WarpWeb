@@ -19,12 +19,13 @@
 		</script>
 	</head>
 	<body>
-		<header class="row" class="col-md-3" style="width:90%">
-			<%@ include file="/htx/menu.html"%>
+		<header>
+			<%@ include file="/htx/menu.html"%>>
 		</header>
 		<form method="post" action="test" name="test" autocomplete="off">
-			<!--  request-time attribute value example. -->
-			<jsp:setProperty name="logEntry" property="entryTime" value="<%= new java.util.Date( ) %>" />
+			
+			<textarea id="servertime" name="servertime" rows="4" cols="120" style="overflow-y: scroll;"><%=  request.getAttribute("DateTime")  %></textarea><br>
+			
 		    <b>Tomcat Version</b> : <%= application.getServerInfo() %><br>    
     			<b>Servlet Specification Version :</b> 
 			<%= application.getMajorVersion() %>.<%= application.getMinorVersion() %> <br>    
@@ -44,7 +45,6 @@
 			<textarea id="headers" name="headers" rows="4" cols="120" style="overflow-y: scroll;"><%=  request.getAttribute("headers")  %></textarea><br>
 			<b>IP Address</b>
 			<%=request.getRemoteAddr() %><br>
-			
 			<b>Cookie</b><br>
 			<%=request.getRemoteAddr() %><br>
 			
