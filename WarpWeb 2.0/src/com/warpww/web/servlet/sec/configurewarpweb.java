@@ -46,12 +46,12 @@ public class configurewarpweb extends HttpServlet {
 			Decrypted Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
 
 
-Init Param Value:  : null
-Clear Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
-Encrypted Text:  : 8/hh5Fkc2CyX6oW3wezU26c//pQ+UdKjwq+YvxJOaDAyDG8ZRD/iCv1lP8COWRxFZfw8xwt8LNpoLoeILJ+MPM4lD4w/rzmU9hrvWQSw6+NL5icdMssRNh4h1O0LkMejHZag45vQMrO8oyom6jjt5ir5nupO4R18ZmwVsWJ2+lKIR3KYTkB+lITwb2aSei0aNjqkWiSGPNDgkSlaKUcENnndIsRtjTt6XAQvvIUFwL1RNUpIqmv8y+vyVkH5gKMlaJRZbvxxnOzwQ8eQMkkfznlgqs0GXhXUaPJJXrrMZiECg9OawO0PeNJS61T54pS+iZ173rHByvdtKf2PVcP3akfzJpUb/fZaGKXqmhQBTdkH8L562fP73x6Ja/e+bC6bSCIeRJZ+EGYAZIxfeMedFQ==
-Salt (Base64):  : DjhM77+9c2E077+9HlkgCe+/ve+/vVcv77+977+9MO+/vQ==
-Token/Password:  : passwd
-Decrypted Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
+	Init Param Value:  : null
+	Clear Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
+	Encrypted Text:  : 8/hh5Fkc2CyX6oW3wezU26c//pQ+UdKjwq+YvxJOaDAyDG8ZRD/iCv1lP8COWRxFZfw8xwt8LNpoLoeILJ+MPM4lD4w/rzmU9hrvWQSw6+NL5icdMssRNh4h1O0LkMejHZag45vQMrO8oyom6jjt5ir5nupO4R18ZmwVsWJ2+lKIR3KYTkB+lITwb2aSei0aNjqkWiSGPNDgkSlaKUcENnndIsRtjTt6XAQvvIUFwL1RNUpIqmv8y+vyVkH5gKMlaJRZbvxxnOzwQ8eQMkkfznlgqs0GXhXUaPJJXrrMZiECg9OawO0PeNJS61T54pS+iZ173rHByvdtKf2PVcP3akfzJpUb/fZaGKXqmhQBTdkH8L562fP73x6Ja/e+bC6bSCIeRJZ+EGYAZIxfeMedFQ==
+	Salt (Base64):  : DjhM77+9c2E077+9HlkgCe+/ve+/vVcv77+977+9MO+/vQ==
+	Token/Password:  : passwd
+	Decrypted Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
 
 Init Param Value:  : 123456790
 Clear Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
