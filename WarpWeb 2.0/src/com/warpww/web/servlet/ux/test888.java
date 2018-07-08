@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.warpww.sec.hsc;
+
 /**
  * Servlet implementation class test888
  */
@@ -38,7 +40,12 @@ public class test888 extends HttpServlet {
 		  
 		//creating ServletContext object  
 		ServletContext context=getServletContext();  
-		  
+		
+		context.setAttribute("configWA", new hsc());
+		
+		System.out.println(context.getAttribute("configWA"));
+		
+		
 		//Getting the value of the initialization parameter and printing it  
 		String driverName=context.getInitParameter("hsc");  
 		pw.println("hsc value is " + driverName);  
