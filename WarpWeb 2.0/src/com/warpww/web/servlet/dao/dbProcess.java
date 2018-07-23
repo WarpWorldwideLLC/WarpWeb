@@ -90,7 +90,7 @@ public class dbProcess extends HttpServlet {
 		try 
         {
             Class.forName("com.mysql.jdbc.Driver");
-            // Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/WarpAdmin2017", "root", "62XYhC;erw;zZaCmZVzrFEwW");
+            
             hsc hscObject = new hsc();
             Connection conn = DriverManager.getConnection(hscObject.jdbcURI, hscObject.jdbcUser, hscObject.jdbcPassword);   
             

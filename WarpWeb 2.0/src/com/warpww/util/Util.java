@@ -40,6 +40,16 @@ import com.warpww.sec.hsc;
 public final class Util {
 	
 	
+	public static boolean isEmpty(String inputValue) {
+		boolean returnValue = true;
+		
+		if(inputValue != null && !inputValue.isEmpty()) {
+			returnValue = true;
+		}
+		
+		return returnValue;
+	}
+	
 	public static String GetFunctionName()
 	{
 		return "FunctionName";

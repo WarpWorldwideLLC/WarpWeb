@@ -48,7 +48,7 @@ public class AuthMod {
 	private String firstName;
 	private String lastName;
 	
-	private hsc configW; 
+	private Hsx configW; 
 	
 	
 	//**********************************************************************
@@ -60,13 +60,16 @@ public class AuthMod {
 	 * Accepts no parameters, takes no actions. 
 	 */
 	public AuthMod() {
-		this.configW = new hsc();
+		// this.configW = new Hsx();
+		// this.configW = (Hsx) this.getServletContext().getAttribute("configW");
 		
 	}
 	
 	public AuthMod(HttpServletRequest request, HttpServletResponse response) {
 		
-		this.configW = new hsc();
+		// this.configW = new Hsx();
+		
+		this.configW = (Hsx) request.getServletContext().getAttribute("configW");
 		
 		this.request = request;
 		this.response = response;
@@ -75,7 +78,9 @@ public class AuthMod {
 	
 	public AuthMod(HttpServletRequest request, HttpServletResponse response, Sign actionValue) {
 
-		this.configW = new hsc();
+		//this.configW = new Hsx();
+		this.configW = (Hsx) request.getServletContext().getAttribute("configW");
+		
 		
 		this.request = request;
 		this.response = response;
@@ -287,7 +292,7 @@ public class AuthMod {
 		
 		Properties prop = new Properties();
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-		InputStream stream = loader.getResourceAsStream(this.configW.resourceFile);
+		InputStream stream = loader.getResourceAsStream(this.configW.getResourceFileName());
 		prop.load(stream);
 		/*
 		Enumeration en = prop.propertyNames(); 
@@ -346,7 +351,7 @@ public class AuthMod {
 		{
 			Properties prop = new Properties();
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-			InputStream stream = loader.getResourceAsStream(this.configW.resourceFile);
+			InputStream stream = loader.getResourceAsStream(this.configW.getResourceFileName());
 			prop.load(stream);
 			/*
 			Enumeration en = prop.propertyNames(); 
@@ -409,7 +414,7 @@ public class AuthMod {
 		
 		int rawValue = Integer.parseInt(memberHex, 16);
 		String offset = createTime.substring(14);
-		returnValue = rawValue - Integer.parseInt(offset) - this.configW.tokenMemberPadding;
+		returnValue = rawValue - Integer.parseInt(offset) - this.configW.getTokenMemberPadding();
 		
 		return returnValue;
 	}
@@ -419,7 +424,7 @@ public class AuthMod {
 		
 			// Token is: Embedded Member ID
 			String offset = createTime.substring(14);
-			int memberCodeN = memberID + Integer.parseInt(offset) + this.configW.tokenMemberPadding;
+			int memberCodeN = memberID + Integer.parseInt(offset) + this.configW.getTokenMemberPadding();
 			String memberCode = Integer.toHexString(memberCodeN);
 			
 			returnValue = memberCode;
@@ -531,9 +536,9 @@ public class AuthMod {
 			// Store a token in a cookie. 
 			Cookie userCookie = new Cookie(this.configW.cookieName, tokenFinal);
 			userCookie.setComment("Used by Warp Worldwide website.");
-			userCookie.setMaxAge(this.configW.tokenExpirationDuration);      
+			userCookie.setMaxAge(this.configW.getTokenExirationDuration());      
 			
-			userCookie.setSecure(this.configW.cookieSSL);       // Cookie can only be retrieved over SSL
+			userCookie.setSecure(this.configW.getCookieSsl());       // Cookie can only be retrieved over SSL
 			userCookie.setHttpOnly(true);       		 		// Cookie can only be retrieved via HTTP 
 			response.addCookie(userCookie);
 			System.out.println("Authentication Cookie added.");

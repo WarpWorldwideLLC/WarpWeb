@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 import com.warpww.sec.AES;
+import com.warpww.sec.Hsx;
 import com.warpww.util.Util;
 
 /**
@@ -34,86 +37,32 @@ public class configurewarpweb extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		
-		//Clear Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
-		/*
-		 * 
-		 * Clear Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
-
-			Encrypted Text:  : JIVA2rU5sDjxfYebPLkS/gpUL5yHbjvBHE4SKLfpEMre0tCn2QpVNMHEic5qfyGmphmljqvXEgdCZcWKzgDiLjFxo7iF5kWCM9UvZ/s/LIgeUv/Efllf1l3PNJY2/htEFGdidl5bJAC3LpCtl19sZf2Oak7Q3jFE5WBOTXFrgGunot0868dLpD5eYGqwWaXkg0lcDEASiwljW2YM36L21Gee6kZ4VQiSsqALOBiHjWVfa86j6aNZXxBSz5DoBAPDVg2a2/CdcjQ2n6wsNsQlUCje+d54KhFTl6wIH5mRwyuxNJU8d4rulBntpPKZuom4/NFYDsX+hFz2IcyLd7pTAACVN+fKg0rA5Yo22ODYSdW+JcnfEXSAXhfkIqTh4moSPf7YwLBFRiZpHomleup8NQ==
-			Salt (Base64):  : OO+/vSDvv70faUjvv70AY++/ve+/ve+/vWLvv71u77+9aO+/ve+/vQ==
-			Token/Password:  : passwd
-			Decrypted Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
-
-
-	Init Param Value:  : null
-	Clear Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
-	Encrypted Text:  : 8/hh5Fkc2CyX6oW3wezU26c//pQ+UdKjwq+YvxJOaDAyDG8ZRD/iCv1lP8COWRxFZfw8xwt8LNpoLoeILJ+MPM4lD4w/rzmU9hrvWQSw6+NL5icdMssRNh4h1O0LkMejHZag45vQMrO8oyom6jjt5ir5nupO4R18ZmwVsWJ2+lKIR3KYTkB+lITwb2aSei0aNjqkWiSGPNDgkSlaKUcENnndIsRtjTt6XAQvvIUFwL1RNUpIqmv8y+vyVkH5gKMlaJRZbvxxnOzwQ8eQMkkfznlgqs0GXhXUaPJJXrrMZiECg9OawO0PeNJS61T54pS+iZ173rHByvdtKf2PVcP3akfzJpUb/fZaGKXqmhQBTdkH8L562fP73x6Ja/e+bC6bSCIeRJZ+EGYAZIxfeMedFQ==
-	Salt (Base64):  : DjhM77+9c2E077+9HlkgCe+/ve+/vVcv77+977+9MO+/vQ==
-	Token/Password:  : passwd
-	Decrypted Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
-
-Init Param Value:  : 123456790
-Clear Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
-Encrypted Text:  : 9qUcfl6g3Hp1XzNqfmwpPxxlXUmjgHT/IlHrYeqSE8+6ctIIAR6HT8sr4noMCtLEz4+1AWeBsFKqKiOVCAUmc/UssxMYWj0RPXc56jMreXQQOmQHO7EI6IkKn6wxeSNWDFsi7EU4/Qry6wpk+pQgg/ReSKAT+FC2PqDGInWXuE0IqpY9zMj/Ow1enyG47sQuosoDVS/MvwmnccK4kOqQE+6bsJQH7vMroFdfqx817Ii7k4QUbKkTqf+D0qoruwecmcckEPHGbKEiHK0nG2FOTk0IHCCkazODNBcirdLALegKkjuAEGIOoaVMY56I3z6OUkH3QmdoZtz1Nywlw0Pe0QW7RvosHegRfF7eRoitYMkgwM4sQY0fgTqS2NqsiHLgUncMmakpfaTzzDiBO7Vusg==
-Salt (Base64):  : 77+9AkYBYwHvv73vv73vv73vv73vv71JGe+/ve+/ve+/ve+/vTnvv70=
-Token/Password:  : passwd
-Decrypted Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","WarpSecUri":"jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8","WarpSecUser":"root","WarpSecPassword":"62XYhC;erw;zZaCmZVzrFEwW","WarpSecEnvironment":"TEST_CN","WarpSecKey":"WarpSecKeyValue"}
-
-
-
-		 */
 		
-
+		
+		/* Read from ServletContext 
 		String initParmValue = this.getServletContext().getInitParameter("test").toString();
 		Util.debugPrint(true, "Init Param Value: ", initParmValue);
+		*/
+
+
+
+		String initKey = this.getServletContext().getInitParameter("WarpInit").toString();
+		Hsx configW = new Hsx();
 		
-		String textToEncrypt = "With great power comes great responsibility.";
+		Util.debugPrint(true,"Before Load", configW.getJdbcUri());
 		
-		// "Generate Random Key"
-		byte[] keyBytes = new byte[32];
+		configW.LoadFromKey(initKey);
+
+		Util.debugPrint(true,"After oad", configW.getJdbcUri());
+		Util.debugPrint(true,"Resoure File Name", configW.getResourceFileName());
 		
-		try {
-			SecureRandom.getInstanceStrong().nextBytes(keyBytes);
-		} catch (NoSuchAlgorithmException e) {
-			
-			e.printStackTrace();
-		}
+		this.getServletContext().setAttribute("configW", configW);
 		
-		// Build the JSON String 
-		JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
-		jsonBuilder.add("CommandName","WarpSecConfigObject");
-		jsonBuilder.add("CommandVersion", "1.0");
-		jsonBuilder.add("WarpSecUri",  "jdbc:mysql://localhost:3306/WarpAdmin_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8");
-		jsonBuilder.add("WarpSecUser", "root");
-		jsonBuilder.add("WarpSecPassword", "62XYhC;erw;zZaCmZVzrFEwW");
-		jsonBuilder.add("WarpSecEnvironment", "TEST_CN");
-		jsonBuilder.add("WarpSecKey", "WarpSecKeyValue");
-		textToEncrypt = jsonBuilder.build().toString();
-				
-		Util.debugPrint(true, "Clear Text: ", textToEncrypt);
-		
-		String encryptedText = null;
-		AES aesObject = new AES();
-		try {
-			encryptedText = aesObject.encyrpt(textToEncrypt);
-			Util.debugPrint(true, "Encrypted Text: ", encryptedText);
-			Util.debugPrint(true, "Salt (Base64): ", aesObject.salt_Base64);
-			Util.debugPrint(true, "Token/Password: ", aesObject.TOKEN);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		String decryptedText = null;
-		
-		try {
-			decryptedText = aesObject.decrypt(encryptedText);
-			Util.debugPrint(true, "Decrypted Text: ", decryptedText);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		Hsx configW2 = (Hsx) this.getServletContext().getAttribute("configW");
+
+		Util.debugPrint(true,"Context Data", configW2.getResourceFileName());
 		
 		
 		request.getRequestDispatcher("WEB-INF/sec/configurewarpweb.jsp").forward(request, response);
@@ -127,4 +76,82 @@ Decrypted Text:  : {"CommandName":"WarpSecConfigObject","CommandVersion":"1.0","
 		doGet(request, response);
 	}
 
+	protected String createEncryptedKey() {
+		String returnValue = null;
+		
+		AES aesObject = new AES();
+		aesObject.ClearDataText = this.getConfig1();
+		aesObject.passphrase = "gracie is beautiful 20131206";
+		
+		
+		try {
+				
+			
+			aesObject.encyrpt();
+			
+			Util.debugPrint(true, "Clear Text: ", aesObject.ClearDataText);
+			Util.debugPrint(true, "Salt: ", aesObject.salt64);
+			Util.debugPrint(true, "Passphrase: ", aesObject.passphrase);
+			Util.debugPrint(true, "Encrypted Text: ", aesObject.encryptedData64);
+			Util.debugPrint(true, "IV", aesObject.IV64);
+			
+			
+			//newData = this.getServletContext().getInitParameter("WarpInit").toString();
+			
+			String originalData = aesObject.decrypt();
+			Util.debugPrint(true, "Decrypted Text: ", originalData);
+			
+			
+			
+			/*
+			String encryptedData64 = "";
+			String IV64 = "";
+			String passphrase = "";
+			String salt64 = "";
+			
+			encryptedData64 = this.getServletContext().getInitParameter("WarpInit").toString();
+			IV64 = "Mv7bSOfSu2O15ISOAxYWxg==";
+			passphrase = "gracie is beautiful 20131206";
+			salt64 = "SldlEIVttItC8O5IN4GOkgRjVpQ=";
+			
+			Util.debugPrint(true, "Salt2: ", salt64);
+			Util.debugPrint(true, "Passphrase2: ", passphrase);
+			Util.debugPrint(true, "Encrypted Text2: ", encryptedData64);
+			Util.debugPrint(true, "IV2", IV64);
+			
+			
+			AES aes = new AES();
+			aes.encryptedData64 = encryptedData64;
+			aes.IV64 = IV64;
+			aes.passphrase = passphrase;
+			aes.salt64 = salt64;
+			aes.decrypt();
+			Util.debugPrint(true, "New Object Decrypted Text: ", aes.ClearDataText);
+			*/
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return returnValue;
+	}
+	
+	
+	protected String getConfig1() {
+		// Build the JSON String 
+		JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+		jsonBuilder.add("CommandName","WarpSecConfigObject");
+		jsonBuilder.add("CommandVersion", "1.0");
+		jsonBuilder.add("WarpSecUri",  "jdbc:mysql://localhost:3306/WarpSec_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8");
+		jsonBuilder.add("WarpSecUser", "root");
+		jsonBuilder.add("WarpSecPassword", "62XYhC;erw;zZaCmZVzrFEwW");
+		jsonBuilder.add("WarpSecEnvironment", "TEST_CN");
+		jsonBuilder.add("WarpSecKey", "WarpSecKeyValue");
+		String textToEncrypt = jsonBuilder.build().toString();
+		
+		return textToEncrypt;
+
+	}
+	
 }
