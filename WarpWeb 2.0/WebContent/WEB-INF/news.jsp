@@ -17,7 +17,7 @@
   				<a target="_blank" href="filx/news_lingo.pdf"><fmt:message key="warp_news.lingo1" /></a>
 			</div>
 			<div style=" margin-top: 1em;">
-  				<a target="_blank" href="filx/news_cultural_immersion.pdf">2018-02-05 - WARP Partners with Xi'An International University to offer Cultural Immersion Camps</a>
+  				<a target="_blank" href="filx/news_cultural_immersion.pdf"><fmt:message key="warp_news.xaiu1" /></a>
 			</div>
 
 		</form>

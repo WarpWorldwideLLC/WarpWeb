@@ -18,7 +18,6 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Charge;
 import com.stripe.model.Customer;
-import com.warpww.sec.hsc;
 
 /**
  * Servlet implementation class stripetest
@@ -56,7 +55,7 @@ public class stripetest extends HttpServlet {
 
 	protected String addToCustomer(String sourceId, String emailAddress) {
 		String returnValue = null;
-		hsc hscObject = new hsc();
+		
 		Stripe.apiKey = "";
 
 		Map<String, Object> customerParams = new HashMap<String, Object>();
@@ -80,7 +79,7 @@ public class stripetest extends HttpServlet {
 		
 		// Set your secret key: remember to change this to your live secret key in production
 		// See your keys here: https://dashboard.stripe.com/account/apikeys
-		hsc hscObject = new hsc();
+		
 		Stripe.apiKey = "";
 
 		Map<String, Object> chargeParams = new HashMap<String, Object>();

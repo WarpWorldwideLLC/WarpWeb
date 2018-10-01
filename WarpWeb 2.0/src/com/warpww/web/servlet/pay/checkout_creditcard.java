@@ -26,7 +26,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Charge;
 import com.warpww.sec.AuthMod;
-import com.warpww.sec.hsc;
+import com.warpww.sec.Hsx;
 import com.warpww.util.Util;
 
 import sun.security.util.Debug;
@@ -61,7 +61,7 @@ public class checkout_creditcard extends HttpServlet {
 		boolean authenticated = false;
 		
 		// Authenticate the User via Cookie; populate memberID and authTime fields.
-		AuthMod authmod = new AuthMod();
+		AuthMod authmod = new AuthMod(request, response);
 		if(authmod.authenticate(request, response)) {
 			memberID = Integer.parseInt(request.getAttribute("verifyToken_MemberID").toString());
 			authTime = request.getAttribute("verifyToken_CreateTime").toString();
@@ -71,6 +71,7 @@ public class checkout_creditcard extends HttpServlet {
 			memberID = 0;	
 		}
 		
+		Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
 		if(authenticated) {
 			
 			// determine if a remove button was pressed
@@ -80,8 +81,9 @@ public class checkout_creditcard extends HttpServlet {
 			}
 			
 			// Public Keys
-			hsc hscObject = new hsc();
-			request.setAttribute("paymentPublicKey", hscObject.pk_stripe);
+			
+			
+			request.setAttribute("paymentPublicKey", configW.getStripePublicKey());
 			
 			// And retrieve the ShoppingCart
 			Util.getShoppingCart(request, response, memberID, false, Util.CartContents.Pending);
@@ -102,11 +104,10 @@ public class checkout_creditcard extends HttpServlet {
 					
 		} else {
 			
-			hsc configW = new hsc();
 			
 			Properties prop = new Properties();
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-			InputStream stream = loader.getResourceAsStream(configW.resourceFile);
+			InputStream stream = loader.getResourceAsStream(configW.getResourceFileName());
 			prop.load(stream);
 		
 			String notLoggedIn = prop.getProperty("checkout.not_logged_in");
@@ -145,8 +146,9 @@ public class checkout_creditcard extends HttpServlet {
 		// Set your secret key: remember to change this to your live secret key in production
 		// See your keys here: https://dashboard.stripe.com/account/apikeys
 		//***********************************************************************************
-		hsc hscObject = new hsc();
-		Stripe.apiKey = hscObject.sk_stripe;
+		Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
+		
+		Stripe.apiKey = configW.getStripeSecretKey();
 		
 		
 		// Token is created using Checkout or Elements!

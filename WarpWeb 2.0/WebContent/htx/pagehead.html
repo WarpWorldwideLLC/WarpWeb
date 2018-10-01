@@ -7,3 +7,10 @@
 <c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="com.warpww.web.i18n.warp" />
+
+<c:if test="${requestScope.resourceCode == 'en-us'}">
+    <fmt:setBundle basename="com.warpww.web.i18n.warp-en-us" />
+</c:if>
+<!--   
+<c:out value="${requestScope.resourceCode}" />
+-->

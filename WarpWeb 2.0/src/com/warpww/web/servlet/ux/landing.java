@@ -1,6 +1,8 @@
 package com.warpww.web.servlet.ux;
 
 import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.warpww.sec.AuthMod;
+import com.warpww.sec.Hsx;
+import com.warpww.util.Util;
 
 /** ***************************************************************************
  * The landing servlet is the default first page for all visitors.<br> 
@@ -48,6 +52,8 @@ public class landing extends HttpServlet {
 		} else {
 			a = new AuthMod(request, response, AuthMod.Sign.out);
 		}
+		
+
 		
 		request.getRequestDispatcher("/WEB-INF/landing.jsp").forward(request, response);
 	}

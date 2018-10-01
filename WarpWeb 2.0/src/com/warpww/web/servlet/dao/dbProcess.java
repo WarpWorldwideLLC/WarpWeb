@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.warpww.sec.hsc;
+import com.warpww.sec.Hsx;
 import com.warpww.util.Util;
 
 import javax.json.Json;
@@ -91,8 +91,10 @@ public class dbProcess extends HttpServlet {
         {
             Class.forName("com.mysql.jdbc.Driver");
             
-            hsc hscObject = new hsc();
-            Connection conn = DriverManager.getConnection(hscObject.jdbcURI, hscObject.jdbcUser, hscObject.jdbcPassword);   
+            //hsc hscObject = new hsc();
+            Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
+            
+            Connection conn = DriverManager.getConnection(configW.getJdbcUri(), configW.getJdbcUser(), configW.getJdbcPassword());   
             
             // System.out.println("dbprocess.processCommand:StoredProc: " + spName);
             CallableStatement cStmt = conn.prepareCall("{call " + spName + "(?)}");

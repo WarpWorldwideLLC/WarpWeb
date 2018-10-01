@@ -1,11 +1,13 @@
 package com.warpww.sec;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.warpww.util.Command;
+import com.warpww.util.Util;
 
 import java.io.InputStream;
 import java.net.URLDecoder;
@@ -23,7 +25,7 @@ import javax.json.Json;
  * AuthMod contains authorization and authentication functions.<br>
  * 
  * AuthMod reads values from the HttpServletRequest and writes values to 
- * HttpServletRequest for use in processing by the rest of the applcation. 
+ * HttpServletRequest for use in processing by the rest of the application. 
  * 
  * @author Warp Worldwide, LLC (Copyright 2016-18 WARP Worldwide, LLC. Subject to the XYZ license.)
  * @version 2.0
@@ -59,17 +61,20 @@ public class AuthMod {
 	 * <br>
 	 * Accepts no parameters, takes no actions. 
 	 */
+	/*
 	public AuthMod() {
 		// this.configW = new Hsx();
-		// this.configW = (Hsx) this.getServletContext().getAttribute("configW");
+		this.configW = (Hsx) this.getServletContext().getAttribute("configW");
 		
 	}
+	*/
 	
 	public AuthMod(HttpServletRequest request, HttpServletResponse response) {
 		
-		// this.configW = new Hsx();
+		ServletContext sc = request.getServletContext();
+		this.configW = (Hsx) sc.getAttribute("configW");
 		
-		this.configW = (Hsx) request.getServletContext().getAttribute("configW");
+		request.setAttribute("resourceCode", this.configW.getResourceCode());
 		
 		this.request = request;
 		this.response = response;
@@ -78,8 +83,10 @@ public class AuthMod {
 	
 	public AuthMod(HttpServletRequest request, HttpServletResponse response, Sign actionValue) {
 
-		//this.configW = new Hsx();
-		this.configW = (Hsx) request.getServletContext().getAttribute("configW");
+		ServletContext sc = request.getServletContext();
+		this.configW = (Hsx) sc.getAttribute("configW");
+		
+		request.setAttribute("resourceCode", this.configW.getResourceCode());
 		
 		
 		this.request = request;
@@ -93,14 +100,12 @@ public class AuthMod {
 			greeting = getGreeting(Integer.parseInt(this.request.getAttribute("MemberID").toString()), this.request, this.response, true);
 			this.memberID = Integer.parseInt(request.getAttribute("MemberID").toString());
 			this.authenticated = true;
-			System.out.println("Authenticated.");
 			break;
 			
 		default:
 			this.authenticated = false;
 			this.memberID = 0;
 			greeting = getGreeting(this.memberID, this.request, this.response, false);
-			System.out.println("Not Authenticated.");
 			break;
 			
 		}
@@ -241,12 +246,10 @@ public class AuthMod {
 				this.memberID = Integer.parseInt(request.getAttribute("verifyToken_MemberID").toString());
 				this.authTime = request.getAttribute("verifyToken_CreateTime").toString();
 				this.authenticated = true;
-				System.out.println("Authenticated.");
 			} else {
 				this.authenticated = false;
 				this.memberID = 0;
 				greeting = getGreeting(this.memberID, this.request, this.response, false);
-				System.out.println("Not Authenticated.");
 			}	
 
 			request.setAttribute("Greeting", greeting);
@@ -292,7 +295,7 @@ public class AuthMod {
 		
 		Properties prop = new Properties();
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-		InputStream stream = loader.getResourceAsStream(this.configW.getResourceFileName());
+		InputStream stream = loader.getResourceAsStream(this.configW.getResourceStreamName());
 		prop.load(stream);
 		/*
 		Enumeration en = prop.propertyNames(); 
@@ -350,8 +353,9 @@ public class AuthMod {
 		try
 		{
 			Properties prop = new Properties();
-			ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-			InputStream stream = loader.getResourceAsStream(this.configW.getResourceFileName());
+			ClassLoader loader = Thread.currentThread().getContextClassLoader();    
+			Util.debugPrint(true, "GreetingConfig", configW.getResourceStreamName());
+			InputStream stream = loader.getResourceAsStream(this.configW.getResourceStreamName());
 			prop.load(stream);
 			/*
 			Enumeration en = prop.propertyNames(); 
@@ -569,25 +573,9 @@ public class AuthMod {
 		        
 		        if (this.configW.cookieName.equals(cookie.getName())) 
 		        {
-		        		/*
-		            System.out.println("Domain: " + cookie.getDomain()); 
-		            System.out.println("Comment: " + cookie.getComment());
-		            System.out.println("MaxAge: " + cookie.getMaxAge());
-		            System.out.println("Name: " + cookie.getName());
-		            System.out.println("Path: " + cookie.getPath());
-		            System.out.println("Value: " + cookie.getValue());
-		            System.out.println("Cookie Name: " + cookie.getName());
-		            */
 		        		
 		            cookieValue = cookie.getValue();
-		            // System.out.println("Cookie Name: " + cookie.getName() + " [" + cookieValue + "]");
-		            
-		            /*
-		            System.out.println("cookieValue: " + cookieValue);
-		            System.out.println("Version: " + cookie.getVersion());
-		            System.out.println("Class: " + cookie.getClass().toString());
-		            System.out.println("Secure: " + cookie.getSecure());
-		            */
+
 		        }
 		        
 		        

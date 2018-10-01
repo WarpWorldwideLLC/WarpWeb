@@ -1,7 +1,5 @@
 <%@ include file="/htx/pagehead.html"%>
 
-
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -37,12 +35,14 @@
     </div>
  -->
  
- 	<!-- 
+<c:if test="${requestScope.resourceCode == 'en-us'}">
     <div class="item active">
       <img src="imgx/1600x650-grace2.jpg" alt=<fmt:message key="landing.carousel.grace_alt" />>
     </div>
-    -->
-    <div class="item active">
+</c:if>
+ 
+
+    <div class="item">
       <img src="imgx/Warp_Image_Hands2-1600-650.jpg" alt=<fmt:message key="landing.carousel.hands_alt" />>
     </div>
     

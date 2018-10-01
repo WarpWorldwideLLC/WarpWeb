@@ -19,8 +19,8 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Charge;
-import com.warpww.sec.hsc;
 import com.warpww.sec.AuthMod;
+import com.warpww.sec.Hsx;
 import com.warpww.util.Util;
 
 /**
@@ -48,8 +48,8 @@ public class campregistration extends HttpServlet {
 		//***********************************************************************************
 		//***********************************************************************************
 		//***********************************************************************************
-		hsc hscObject = new hsc();
-		request.setAttribute("paymentPublicKey", hscObject.pk_stripe);
+		Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
+		request.setAttribute("paymentPublicKey", configW.getStripePublicKey());
 		//***********************************************************************************
 		//***********************************************************************************
 		//***********************************************************************************
@@ -94,7 +94,7 @@ public class campregistration extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		AuthMod authmod = new AuthMod();
+		AuthMod authmod = new AuthMod(request, response);
 		authmod.authenticate(request, response);
 		
 		validateRegistration(request, response);
@@ -167,8 +167,8 @@ public class campregistration extends HttpServlet {
 		//***********************************************************************************
 		//***********************************************************************************
 		//***********************************************************************************
-		hsc hscObject = new hsc();
-		Stripe.apiKey = hscObject.sk_stripe;
+		Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
+		Stripe.apiKey = configW.getStripeSecretKey();
 		//***********************************************************************************
 		//***********************************************************************************
 		//***********************************************************************************

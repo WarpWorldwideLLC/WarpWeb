@@ -64,7 +64,7 @@ public class login extends HttpServlet {
 			{
 				if(!request.getParameter("passPhrase").trim().isEmpty() && request.getParameter("passPhrase").trim() != null)
 				{ 
-					AuthMod authmod = new AuthMod();
+					AuthMod authmod = new AuthMod(request, response);
 					String passphraseHash = Password.createHash(request.getParameter("passPhrase"));
 					request.setAttribute("passphraseHash", passphraseHash);
 					validated = authmod.validateSignon(request, response);

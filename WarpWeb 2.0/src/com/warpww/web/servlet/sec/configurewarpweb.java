@@ -36,34 +36,25 @@ public class configurewarpweb extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
 		/* Read from ServletContext 
 		String initParmValue = this.getServletContext().getInitParameter("test").toString();
 		Util.debugPrint(true, "Init Param Value: ", initParmValue);
 		*/
-
-
-
-		String initKey = this.getServletContext().getInitParameter("WarpInit").toString();
+		
+		// this.createEncryptedKey();
+		ServletContext sc = request.getServletContext();
+		Hsx cw = (Hsx) sc.getAttribute("configW");
+		Util.debugPrint(true, "JDBC_URI" , cw.getJdbcUri());
+		
+		String initKey = request.getServletContext().getInitParameter("WarpInit").toString();
 		Hsx configW = new Hsx();
 		
-		Util.debugPrint(true,"Before Load", configW.getJdbcUri());
+		// configW.LoadFromKey(initKey);
+		request.setAttribute("resourceFileName", cw.getResourceFileName());
 		
-		configW.LoadFromKey(initKey);
-
-		Util.debugPrint(true,"After oad", configW.getJdbcUri());
-		Util.debugPrint(true,"Resoure File Name", configW.getResourceFileName());
-		
-		this.getServletContext().setAttribute("configW", configW);
-		
-		Hsx configW2 = (Hsx) this.getServletContext().getAttribute("configW");
-
-		Util.debugPrint(true,"Context Data", configW2.getResourceFileName());
-		
+		// this.getServletContext().setAttribute("configW", configW);
 		
 		request.getRequestDispatcher("WEB-INF/sec/configurewarpweb.jsp").forward(request, response);
 	}
@@ -137,10 +128,10 @@ public class configurewarpweb extends HttpServlet {
 		return returnValue;
 	}
 	
-	
 	protected String getConfig1() {
 		// Build the JSON String 
 		JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+		/* WARP_CN_TEST
 		jsonBuilder.add("CommandName","WarpSecConfigObject");
 		jsonBuilder.add("CommandVersion", "1.0");
 		jsonBuilder.add("WarpSecUri",  "jdbc:mysql://localhost:3306/WarpSec_CN?useUnicode=yes&useSSL=false&characterEncoding=UTF-8");
@@ -148,6 +139,17 @@ public class configurewarpweb extends HttpServlet {
 		jsonBuilder.add("WarpSecPassword", "62XYhC;erw;zZaCmZVzrFEwW");
 		jsonBuilder.add("WarpSecEnvironment", "TEST_CN");
 		jsonBuilder.add("WarpSecKey", "WarpSecKeyValue");
+		*/
+		
+		// WARP_EN_TEST
+		jsonBuilder.add("CommandName","WarpSecConfigObject");
+		jsonBuilder.add("CommandVersion", "1.0");
+		jsonBuilder.add("WarpSecUri",  "jdbc:mysql://localhost:3306/WarpSec?useUnicode=yes&useSSL=false&characterEncoding=UTF-8");
+		jsonBuilder.add("WarpSecUser", "root");
+		jsonBuilder.add("WarpSecPassword", "62XYhC;erw;zZaCmZVzrFEwW");
+		jsonBuilder.add("WarpSecEnvironment", "TEST");
+		jsonBuilder.add("WarpSecKey", "WarpSecKeyValue");
+		
 		String textToEncrypt = jsonBuilder.build().toString();
 		
 		return textToEncrypt;

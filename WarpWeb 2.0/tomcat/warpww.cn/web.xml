@@ -4152,6 +4152,15 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
+  <!-- ==================== Warp Init Parameter ===================== -->
+	<context-param>
+    	<description>WarpWeb Initialization Vector</description>
+    	<param-name>WarpInit</param-name>
+    	<param-value>
+    		14ek7dduZNbjf3sErWuoV0XIGbp9aZN52SpG+OX6Lh0EyjMKuhVNhZlhZsXYes7u3WAG4xH6YZFxvEilSWlNbpvilepnAIZYMN1y/myBnvVrP1jE7woT3bA3vi0Wikv7RamnLdWQSN+zIRZ8J9ci7i1JUa1kffGqsxVgepdkO4MVJdwZcpCo6/z6dhNUZZXI4jBghtVRXrKSkiIlL6fvd1K7BfP06pOgygLT5udMGKaVuEXek7FqJ20IhnliNS4C5fFwY6QRfijJsH7QcSj29xPhNBaogtWNhzmR0GYtp+/sshoSoFpFG2E6+6EIdK7eRJhiF0jFgr8bwDrc+c2Fbd4NbT2/6ycsk/4bq/pPlgRKIG59Oh49kwWgUV6GM0TIPGsNr3DrEMWnuAvQSm19ew==	
+    	</param-value>
+	</context-param>
+
   <!-- ==================== Force All Traffic SSL ===================== -->
 	<security-constraint>
 		<web-resource-collection>

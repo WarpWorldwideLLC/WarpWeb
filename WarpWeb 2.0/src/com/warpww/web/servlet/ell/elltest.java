@@ -36,7 +36,7 @@ public class elltest extends HttpServlet {
 
 		try {
 			
-			ellutil eu = new ellutil();
+			ellutil eu = new ellutil(request);
 			
 			Date date = new Date();
 			String formattedDate = new SimpleDateFormat("ssSSS").format(date);

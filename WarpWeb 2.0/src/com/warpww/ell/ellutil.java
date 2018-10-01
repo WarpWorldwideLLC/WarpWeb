@@ -27,8 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.warpww.sec.hsc;
 import com.warpww.sec.DES;
+import com.warpww.sec.Hsx;
 import com.warpww.util.Util;
 
 public class ellutil {
@@ -54,6 +54,8 @@ public class ellutil {
 	public boolean userAlreadyExists = false;
 	
 	private boolean debugMode = true;
+	
+	private Hsx configW = null;
 	
 	// ********************************************************************************************
 	// Accessors and Mutators (Getters and Setters)
@@ -169,8 +171,8 @@ public class ellutil {
 	// ********************************************************************************************	
 	// Constructors
 	// ********************************************************************************************
-	public ellutil() {
-		
+	public ellutil(HttpServletRequest request) {
+		this.configW = (Hsx) request.getServletContext().getAttribute("configW");
 	}
 
 	
@@ -294,7 +296,6 @@ public class ellutil {
 	public boolean addLicenseToAllSolutionsForMember(HttpServletRequest request, HttpServletResponse response, int memberID) { 
 		boolean returnValue = false;
 		
-		hsc configW = new hsc();
 		
 		try {
 			
@@ -304,7 +305,7 @@ public class ellutil {
 					 .add("AuID", 1)
 					 .add("IuID", 1)
 					 .add("MemberID", memberID)
-					 .add("SystemMode", configW.systemMode)
+					 .add("SystemMode", this.configW.getSystemMode())
 					 .build()
 					 .toString(); 		
 
@@ -350,7 +351,7 @@ public class ellutil {
 								
 				Properties prop = new Properties();
 				ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-				InputStream stream = loader.getResourceAsStream(configW.resourceFile);
+				InputStream stream = loader.getResourceAsStream(this.configW.getResourceFileName());
 				prop.load(stream);
 				
 				// displayCart = "No Solutions Active or Available.";
@@ -423,10 +424,10 @@ public class ellutil {
 		boolean returnValue = false;
 		
 		final String uriSuffix = "/user/create";
-		hsc configW = new hsc();
-		String createUri = configW.ell_apiuri + uriSuffix;
 		
-		String param = "clientId=" + configW.ell_clientid
+		String createUri = this.configW.getEllApiUri() + uriSuffix;
+		
+		String param = "clientId=" + this.configW.getEllClientID()
 				+ "&username=" + this.ellUserID 
 				+ "&password=" + this.password
 				+ "&email=" + this.email
@@ -472,13 +473,12 @@ public class ellutil {
 	public boolean assignLicense(String ellUserID, String ellLicenseID) {
 		boolean returnValue = false;
 		
-		// {"message":"The user has been assigned,canot assign again!","status":1}
+		// {"message":"The user has been assigned, canot assign again!","status":1}
 		
 		final String uriSuffix = "/license/assign";
-		hsc configW = new hsc();
 		
-		String url = configW.ell_apiuri + uriSuffix;
-		String param = "clientId=" + configW.ell_clientid + "&userId=" + ellUserID + "&licenseId=" + ellLicenseID;
+		String url = this.configW.getEllApiUri() + uriSuffix;
+		String param = "clientId=" + this.configW.getEllClientID() + "&userId=" + ellUserID + "&licenseId=" + ellLicenseID;
 		
 		System.out.println("URL: " + url);
 		System.out.println("Params: " + param);
@@ -505,16 +505,16 @@ public class ellutil {
 		String returnValue = null;
 		final String uriSuffix = "/user/autologin";
 		
-		hsc configW = new hsc();
-		String ssoUri = configW.ell_ssouri + uriSuffix;
+		
+		String ssoUri = this.configW.getEllSsoUri() + uriSuffix;
 		
 		try {
 			
 			String ssoParams = "?";
 			String parmUid = "uid=" + inputUserID;
 			
-			String parmUserInfo = "userInfo=" + DES.ellEncrypt(configW.ell_sk, parmUid);
-			String parmPartnerID = "&partnerId=" +  configW.ell_clientid;
+			String parmUserInfo = "userInfo=" + DES.ellEncrypt(this.configW.getEllSecretKey(), parmUid);
+			String parmPartnerID = "&partnerId=" +  this.configW.getEllClientID();
 			ssoParams += parmUserInfo + parmPartnerID;
 			
 			ssoUri += ssoParams; 
@@ -620,15 +620,14 @@ public class ellutil {
      */
 	public String sendHttpsPost(String POST_URL,String params) throws IOException {
 		
-		hsc configW = new hsc();
 		
 		// Clear any old codes before starting.
 		this.HttpResponseCode = -1;
 		this.HttpResponseMessage = null;
 		
 		String result = "";  
-		String name = configW.ell_clientid; //provided by ELL
-		String password = configW.ell_sk;   // provided by ELL
+		String name = this.configW.getEllClientID(); //provided by ELL
+		String password = this.configW.getEllSecretKey();   // provided by ELL
 		String authString = name + ":" + password;
 		
 		Util.debugPrint(debugMode, "ellutil.sendHttpsPost POST_URL", POST_URL);

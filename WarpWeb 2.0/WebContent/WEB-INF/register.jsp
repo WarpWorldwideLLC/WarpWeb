@@ -63,7 +63,7 @@
 				  	<td><input type="password" name="passPhrase2" id="passPhrase2" class="registerInput"></td>
 				  </tr>		
 				  <tr>
-				  	<td><button type="button" onclick="toggleHide2('passPhrase1','passPhrase2')" id="passToggle" class="btn btn-primary">Show/Hide Passphrase</button></td>
+				  	<td><button type="button" onclick="toggleHide2('passPhrase1','passPhrase2')" id="passToggle" class="btn btn-primary" style="display:none">Show/Hide Passphrase</button></td>
 				  	<td><textarea id="errorMessage" name="errorMessage" class="statusMessageBox" style='<%=request.getAttribute("ErrorMessageVisible")%>' readonly><%=request.getAttribute("ErrorMessage")%></textarea></td>
 	  			</tr>
 	  		</table>

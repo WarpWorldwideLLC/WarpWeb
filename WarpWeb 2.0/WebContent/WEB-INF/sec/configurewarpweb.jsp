@@ -1,4 +1,5 @@
 <%@ include file="/htx/pagehead.html"%>
+<c:out value="${requestScope.resourceFileName}" />
 
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,9 @@
 		</header>
 
 		<form method="post" action="landing" name="landing" autocomplete="off">
+			
+			<input type="text" name="resourceFileName" id="resourceFileName" class="registerInput" value=${resourceFileName}>
+			
 			<p><fmt:message key="configure-warpweb.form_title" /></p>
 			<fmt:message key="configure-warpweb.form_title" />
 			

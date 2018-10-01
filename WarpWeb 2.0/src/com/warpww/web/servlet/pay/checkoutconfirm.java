@@ -20,7 +20,7 @@ import com.stripe.model.Charge;
 import com.stripe.model.Customer;
 import com.warpww.ell.ellutil;
 import com.warpww.sec.AuthMod;
-import com.warpww.sec.hsc;
+import com.warpww.sec.Hsx;
 import com.warpww.util.Util;
 
 /**
@@ -51,7 +51,7 @@ public class checkoutconfirm extends HttpServlet {
 		boolean authenticated = false;
 		
 		// Authenticate the User via Cookie; populate memberID and authTime fields.
-		AuthMod authmod = new AuthMod();
+		AuthMod authmod = new AuthMod(request, response);
 		if(authmod.authenticate(request, response)) {
 			memberID = Integer.parseInt(request.getAttribute("verifyToken_MemberID").toString());
 			authTime = request.getAttribute("verifyToken_CreateTime").toString();
@@ -80,8 +80,8 @@ public class checkoutconfirm extends HttpServlet {
 
 		
 		if(request.getParameter("confirmPayment") != null) {
-			String customerId = addToCustomer(request.getParameter("paymentSourceId"), request.getParameter("email-address"));
-			processPayment(request.getParameter("paymentSourceId"), customerId, totalCost);
+			String customerId = addToCustomer(request, request.getParameter("paymentSourceId"), request.getParameter("email-address"));
+			processPayment(request, request.getParameter("paymentSourceId"), customerId, totalCost);
 			/*
 			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 			System.out.println("Payment Source ID: " + request.getParameter("paymentSourceId"));
@@ -105,7 +105,7 @@ public class checkoutconfirm extends HttpServlet {
 			 */
 			/* ****************************************************************/
 			/* ****************************************************************/
-			ellutil eu = new ellutil();
+			ellutil eu = new ellutil(request);
 			eu.getMemberDataFromDb(memberID, request, response);
 			eu.createNewUser();
 			eu.addMemberEllUserId(memberID, request, response);
@@ -122,8 +122,8 @@ public class checkoutconfirm extends HttpServlet {
 			
 		} else if(request.getParameter("source") != null) {
 		
-			String customerId = addToCustomer(request.getParameter("source"), request.getParameter("email-address"));
-			processPayment(request.getParameter("source"), customerId, totalCost);
+			String customerId = addToCustomer(request, request.getParameter("source"), request.getParameter("email-address"));
+			processPayment(request, request.getParameter("source"), customerId, totalCost);
 			/*
 			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 			System.out.println("Payment Source ID: " + request.getParameter("paymentSourceId"));
@@ -147,7 +147,7 @@ public class checkoutconfirm extends HttpServlet {
 			 */
 			/* ****************************************************************/
 			/* ****************************************************************/
-			ellutil eu = new ellutil();
+			ellutil eu = new ellutil(request);
 			eu.getMemberDataFromDb(memberID, request, response);
 			eu.createNewUser();
 			eu.addMemberEllUserId(memberID, request, response);
@@ -176,10 +176,12 @@ public class checkoutconfirm extends HttpServlet {
 	
 	}
 	
-	protected String addToCustomer(String sourceId, String emailAddress) {
+	protected String addToCustomer(HttpServletRequest request, String sourceId, String emailAddress) {
 		String returnValue = null;
-		hsc hscObject = new hsc();
-		Stripe.apiKey = hscObject.sk_stripe;
+		
+		Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
+		
+		Stripe.apiKey = configW.getStripeSecretKey();
 
 		Map<String, Object> customerParams = new HashMap<String, Object>();
 		customerParams.put("email", emailAddress);
@@ -197,13 +199,14 @@ public class checkoutconfirm extends HttpServlet {
 		return returnValue;
 	}
 	
-	protected String processPayment(String sourceId, String customerId, int paymentAmount) { 
+	protected String processPayment(HttpServletRequest request, String sourceId, String customerId, int paymentAmount) { 
 		String returnValue = null;
 		
 		// Set your secret key: remember to change this to your live secret key in production
 		// See your keys here: https://dashboard.stripe.com/account/apikeys
-		hsc hscObject = new hsc();
-		Stripe.apiKey = hscObject.sk_stripe;
+		
+		Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
+		Stripe.apiKey = configW.getStripeSecretKey();
 
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
 		chargeParams.put("amount", paymentAmount);

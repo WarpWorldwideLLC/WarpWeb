@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.warpww.sec.hsc;
 import com.warpww.sec.AuthMod;
+import com.warpww.sec.Hsx;
 
 
 /**
@@ -56,8 +56,8 @@ public class logout extends HttpServlet {
 		boolean returnValue = false;
 		
 		// Set Cookie MaxAge to 0, deleting it when the browser processes the header.
-		hsc hscObject = new hsc();
-		Cookie userCookie = new Cookie(hscObject.cookieName, "");
+		Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
+		Cookie userCookie = new Cookie(configW.getCookieName(), "");
 		userCookie.setMaxAge(0);      
 		response.addCookie(userCookie);
 		System.out.println("Authentication Cookie Deleted.");
@@ -81,8 +81,9 @@ public class logout extends HttpServlet {
 		    		
 		        Cookie cookie = cookies[i];
 		        
-		        hsc hscObject = new hsc();
-		        if (hscObject.cookieName.equals(cookie.getName())) 
+		        
+		        Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
+		        if (configW.getCookieName().equals(cookie.getName())) 
 		        {
 		        		/*
 		            System.out.println("Domain: " + cookie.getDomain()); 

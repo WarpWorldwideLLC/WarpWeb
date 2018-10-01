@@ -19,21 +19,21 @@ public class warplistener implements ServletContextListener {
      * Default constructor. 
      */
     public warplistener() {
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
     public void contextDestroyed(ServletContextEvent sce)  { 
-         // TODO Auto-generated method stub
+        
     }
 
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent sce)  { 
-		Util.debugPrint(true, "warplistener.contextInitialized:", "Got Here.");
+		Util.debugPrint(true, "warplistener.contextInitialized", "");
 		
 		ServletContext sc = sce.getServletContext();
 		
@@ -42,6 +42,8 @@ public class warplistener implements ServletContextListener {
 		configW.LoadFromKey(initKey);
 		
 		sc.setAttribute("configW", configW);
+		Hsx cw = (Hsx) sc.getAttribute("configW");
+		Util.debugPrint(true, "JDBC_URI" , cw.getJdbcUri());
 		
     }
 	

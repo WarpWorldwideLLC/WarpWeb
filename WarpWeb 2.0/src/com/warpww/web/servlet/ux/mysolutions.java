@@ -1,6 +1,8 @@
 package com.warpww.web.servlet.ux;
 
 import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.warpww.sec.AuthMod;
+import com.warpww.sec.Hsx;
 import com.warpww.util.Util;
 
 /**
@@ -37,6 +40,7 @@ public class mysolutions extends HttpServlet {
 		} else {
 			request.setAttribute("mySolutions", "You must be logged in to view your solutions.");
 		}
+		
 		
 		if(request.getParameter("olcCmd") != null) {
 			try {

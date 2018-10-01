@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.warpww.sec.hsc;
 import com.warpww.sec.AuthMod;
+import com.warpww.sec.Hsx;
 import com.warpww.util.Util;
 
 /**
@@ -87,11 +87,12 @@ public class cartmaint extends HttpServlet {
 			
 		} else {
 			
-			hsc configW = new hsc();
+			
+			Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
 			
 			Properties prop = new Properties();
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-			InputStream stream = loader.getResourceAsStream(configW.resourceFile);
+			InputStream stream = loader.getResourceAsStream(configW.getResourceFileName());
 			prop.load(stream);
 		
 			

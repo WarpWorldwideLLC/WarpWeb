@@ -24,7 +24,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.warpww.sec.hsc;
+import com.warpww.sec.Hsx;
 
 /** ***************************************************************************
  * The Util class contains a variety of miscellaneous static functions. 
@@ -500,15 +500,16 @@ public final class Util {
 				
 				displayCart += "<table class=\"table1\">";
 				displayCart += "<tr><td>&nbsp</td><td>Code</td><td>Name</td><td>Price</td><td>&nbsp</td></tr>";
-	
-				hsc configW = new hsc();
+				
+				Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
+				
 				
 				Properties prop = new Properties();
 				ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-				InputStream stream = loader.getResourceAsStream(configW.resourceFile);
+				InputStream stream = loader.getResourceAsStream(configW.getResourceStreamName());
 				prop.load(stream);
 				
-				hsc hscObject = new hsc();
+				// hsc hscObject = new hsc();
 				
 				String removeButtonText = prop.getProperty("cart.remove_button");
 				
@@ -528,7 +529,7 @@ public final class Util {
 					displayCart += "<td>" + explrObject.getJsonNumber("CartID").toString() + "</td>";
 				    displayCart += "<td>" + explrObject.getJsonString("SolutionCode").toString().replaceAll("\"", "") + "</td>";
 				    displayCart += "<td>" + localizedSolutionName + "</td>";
-				    displayCart += "<td>" +  hscObject.currencySymbol + " " + String.format("%,.2f", (double)solutionCost/100) + "</td>";
+				    displayCart += "<td>" +  configW.getCurrencySymbol() + " " + String.format("%,.2f", (double)solutionCost/100) + "</td>";
 				    if(showButtons) {
 				    		displayCart += "<td>" + "<button name=\"remove\" class=\"btn btn-primary\" value=\"" + explrObject.getJsonNumber("CartID").toString() + "\"><fmt:message key=\"warp_vega.p101.payment\" />" + removeButtonText +"</button></td>";
 				    } else {
@@ -536,9 +537,9 @@ public final class Util {
 				    }
 				    displayCart += "</tr>";
 				}
-				System.out.println("totalCost from getShoppingCart: " + totalCost);
+
 				request.setAttribute("ShoppingCartTotalCost", totalCost);
-				displayCart += "<tr><td>&nbsp</td><td>&nbsp</td><td>Total Due: </td><td>" +  hscObject.currencySymbol + " " + String.format("%,.2f", (double)totalCost/100) + "</td><td>&nbsp</td></tr>";
+				displayCart += "<tr><td>&nbsp</td><td>&nbsp</td><td>Total Due: </td><td>" +  configW.getCurrencySymbol() + " " + String.format("%,.2f", (double)totalCost/100) + "</td><td>&nbsp</td></tr>";
 				displayCart += "</table>";
 				displayCart += "<br><br>";
 				request.setAttribute("displayCart", displayCart);
@@ -817,11 +818,11 @@ public final class Util {
 				// returnValue = originalDoc.getJsonString("CommandResults").toString();
 				// System.out.println("Checkout getShoppingCart ProcStatus: " + returnValue);
 				
-				hsc configW = new hsc();
+				Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
 				
 				Properties prop = new Properties();
 				ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-				InputStream stream = loader.getResourceAsStream(configW.resourceFile);
+				InputStream stream = loader.getResourceAsStream(configW.getResourceStreamName());
 				prop.load(stream);
 				
 				displayCart += "<table class=\"table1\">";
@@ -892,11 +893,11 @@ public final class Util {
 			} else {
 				// displayCart = "No Solutions Active or Available.";
 				
-				hsc configW = new hsc();
+				Hsx configW = (Hsx) request.getServletContext().getAttribute("configW");
 				
 				Properties prop = new Properties();
 				ClassLoader loader = Thread.currentThread().getContextClassLoader();           
-				InputStream stream = loader.getResourceAsStream(configW.resourceFile);
+				InputStream stream = loader.getResourceAsStream(configW.getResourceStreamName());
 				prop.load(stream);
 				
 				// displayCart = "No Solutions Active or Available.";
